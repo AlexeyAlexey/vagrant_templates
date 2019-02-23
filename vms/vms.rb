@@ -1,3 +1,5 @@
+require 'fileutils'
+
 module Vms
   @@settings = {}
 
@@ -16,16 +18,13 @@ module Vms
     @@settings
   end
 
-  def self.add(sett)
-    sett.each do |key, value|
-      if @@settings[key]
-        @@settings.merge!(value)
-      else
-        @@settings.merge!({key => value})
-      end
+  def self.create_dirs(dirs = [])
+    root = File.expand_path("..", File.dirname(__FILE__))
+    dirs.each do |dir|
+      dirname = root + "/#{dir}"
+      FileUtils.mkdir_p(dirname) if !Dir.exist?(dirname)
     end
   end
-
   
   def self.network(node, sett)
     sett[:network]&.each{|net_sett| node.vm.network *net_sett}

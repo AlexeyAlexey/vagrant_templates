@@ -8,14 +8,15 @@ module Vms
         #libvirt.id_ssh_key_file = "/home/alexey/.vagrant.d/insecure_private_key"
       end
       node.vm.hostname =  current_settings[:hostname]
-      node.vm.box     = "ubuntu-17.10-server-amd64-libvirt" #for elixir ubuntu version is 17  "ubuntu-18.04-server-amd64-libvirt"
+      node.vm.box      = current_settings[:box_name]#"ubuntu-17.10-server-amd64-libvirt" #for elixir ubuntu version is 17  "ubuntu-18.04-server-amd64-libvirt"
 
       current_settings[:synced_folder]&.each{|sett| node.vm.synced_folder *sett}
       node.nfs.map_uid = 1000
       node.nfs.map_gid = 1000
 
       #psql -h 192.168.55.95 -U postgres   check db connection db
-      current_settings[:network]&.each{|sett| node.vm.network *sett}
+      network(node, current_settings)
+      #current_settings[:network]&.each{|sett| node.vm.network *sett}
 
       # Shell
       node.vm.provision :shell, path: "scripts/git.sh"

@@ -7,36 +7,51 @@ Dir.glob("#{File.dirname(__FILE__)}/vms/*.rb") { |file|  require file }
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
 
-Vms.settings = {"phoenix_chat_service" => {hostname: "phoenixChatService",
-                                           network: [ [:private_network, {autosrart: true, ip: "192.168.90.95"}],
-                                                      [:forwarded_port, {guest: 4005, host: 4005}] 
-                                                    ]
-                                          },
-                "rails_social" =>         {hostname: "railsSocial",
-                                           network: [ [:private_network, {autosrart: true, ip: "192.168.90.96"}],
-                                                      [:forwarded_port, {guest: 3000, host: 3000}]
-                                                    ]
-                                          },
-                "phoenix_postgresql" =>  {hostname: "phoenixPostgresql",
-                                          network: [ [:private_network, {autosrart: true, ip: "192.168.90.80"}] ]
-                                          },
-                "rails_postgresql" =>    {hostname: "railsPostgresql",
-                                          network: [ [:private_network, {autosrart: true, ip: "192.168.90.81"}] ]
-                                         },
-                "phoenix_mongodb"  =>    {hostname: "phoenixMongodb",
+Vms.settings = 
+  {"phoenix_chat_service" => {box_name: "ubuntu-17.10-server-amd64-libvirt"},                                           
+   "rails_social"         => {box_name: "ubuntu-17.10-server-amd64-libvirt"},
+   "phoenix_postgresql"   => {box_name: "ubuntu-17.10-server-amd64-libvirt"},
+   "rails_postgresql"     => {box_name: "ubuntu-17.10-server-amd64-libvirt"},
+   "phoenix_mongodb"      => {box_name: "ubuntu-17.10-server-amd64-libvirt"},
+   "docker"               => {box_name: "ubuntu-17.10-server-amd64-libvirt"},
+  }
+
+
+Vms.settings = 
+  {"phoenix_chat_service" => {hostname: "phoenixChatService",
+                              network: [ [:private_network, {autosrart: true, ip: "192.168.90.95"}],
+                                         [:forwarded_port, {guest: 4005, host: 4005}] 
+                                       ]
+                             },
+   "rails_social" =>         {hostname: "railsSocial",
+                              network: [ [:private_network, {autosrart: true, ip: "192.168.90.96"}],
+                                         [:forwarded_port, {guest: 3000, host: 3000}]
+                                       ]
+                             },
+   "phoenix_postgresql" =>  {hostname: "phoenixPostgresql",
+                             network: [ [:private_network, {autosrart: true, ip: "192.168.90.80"}] ]
+                            },
+   "rails_postgresql" =>    {hostname: "railsPostgresql",
+                             network: [ [:private_network, {autosrart: true, ip: "192.168.90.81"}] ]
+                            },
+   "phoenix_mongodb"  =>    {hostname: "phoenixMongodb",
                                           network: [ [:private_network, {autosrart: true, ip: "192.168.90.82"}] ]
                                          },
-                "docker" =>              {hostname: "docker"}
-}
+   "docker" =>              {hostname: "docker"}
+  }
 
-Vms.settings = {"phoenix_chat_service" => {synced_folder: [ ["./web_phoenix", "/vagrant", type: "nfs"] ] },                                           
-                "rails_social"         => {synced_folder: [ ["./web_rails",   "/vagrant", type: "nfs"] ] },
-                "phoenix_postgresql"   => {synced_folder: [ ["./postgresql",  "/vagrant", type: "nfs"] ] },
-                "rails_postgresql"     => {synced_folder: [ ["./postgresql",  "/vagrant", type: "nfs"] ] },
-                "phoenix_mongodb"      => {synced_folder: [ ["./mongodb",     "/vagrant", type: "nfs"] ] }
-}
+Vms.settings = 
+  {"phoenix_chat_service" => {synced_folder: [ ["./web_phoenix", "/vagrant", type: "nfs"] ] },                                           
+   "rails_social"         => {synced_folder: [ ["./web_rails",   "/vagrant", type: "nfs"] ] },
+   "phoenix_postgresql"   => {synced_folder: [ ["./postgresql",  "/vagrant", type: "nfs"] ] },
+   "rails_postgresql"     => {synced_folder: [ ["./postgresql",  "/vagrant", type: "nfs"] ] },
+   "phoenix_mongodb"      => {synced_folder: [ ["./mongodb",     "/vagrant", type: "nfs"] ] }
+  }
+
+Vms.settings = {"rails_social" => {ruby_version: "2.5"}}
 
 
+#Vms.create_dirs(["new_dir", "new2/new1"])
 #vagrant global-status
 Vagrant.configure("2") do |config|
   # The most common configuration options are documented and commented below.
