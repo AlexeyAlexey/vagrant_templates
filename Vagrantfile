@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
 
 
-  config.vm.define "def_name" do |node|
+  config.vm.define "def_name_tamplates_test" do |node|
       
     node.vm.provider :libvirt do |libvirt|
     end
@@ -28,16 +28,17 @@ Vagrant.configure("2") do |config|
 
     node.vm.synced_folder ".", "/vagrant", type: "nfs", map_uid: 1000, map_gid: 100                                     
     
-    VmsProvision.web_phoenix(node)
+    #VmsProvision.install_rvm(node)
+    #VmsProvision.web_phoenix(node)
 
     VmsProvision.web_rails(node)
   
-    VmsProvision.postgresql_9_6(node)
-    VmsProvision.postgresql_client_9_6(node)
+    #VmsProvision.postgresql_9_6(node)
+    #VmsProvision.postgresql_client_9_6(node)
 
-    VmsProvision.mongodb(node)
+    #VmsProvision.mongodb(node)
 
-    VmsProvision.docker(node)
+    #VmsProvision.docker(node)
  
   end
 

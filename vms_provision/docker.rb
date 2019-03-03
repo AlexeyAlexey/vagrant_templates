@@ -1,4 +1,4 @@
-module Vms
+module VmsProvision
   def self.docker(node, conf = {})
     # Shell
     node.vm.provision :shell, path: "scripts/docker.sh", args: ["18.06.0~ce~3-0~ubuntu"], privileged: true
