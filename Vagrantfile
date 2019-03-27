@@ -18,20 +18,21 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
 
 
-  config.vm.define "def_name_tamplates_test" do |node|
+  config.vm.define "def_tamplate_name" do |node|
       
     node.vm.provider :libvirt do |libvirt|
     end
     
     #node.vm.hostname = "HostName"
-    node.vm.box      = "ubuntu-17.10-server-amd64-libvirt" #for elixir ubuntu version is 17  "ubuntu-18.04-server-amd64-libvirt"
+    node.vm.box      = "ubuntu-18.04-server-amd64-libvirt"#"ubuntu-17.10-server-amd64-libvirt" #for elixir ubuntu version is 17  "ubuntu-18.04-server-amd64-libvirt"
 
     node.vm.synced_folder ".", "/vagrant", type: "nfs", map_uid: 1000, map_gid: 100                                     
     
     #VmsProvision.install_rvm(node)
     #VmsProvision.web_phoenix(node)
 
-    VmsProvision.web_rails(node)
+    #VmsProvision.web_rails(node)
+    VmsProvision.api_phoenix(node, {phx_version: "1.4.2"})
   
     #VmsProvision.postgresql_9_6(node)
     #VmsProvision.postgresql_client_9_6(node)
