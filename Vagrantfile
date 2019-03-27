@@ -29,10 +29,11 @@ Vagrant.configure("2") do |config|
     node.vm.synced_folder ".", "/vagrant", type: "nfs", map_uid: 1000, map_gid: 100                                     
     
     #VmsProvision.install_rvm(node)
-    #VmsProvision.web_phoenix(node)
 
     #VmsProvision.web_rails(node)
-    VmsProvision.api_phoenix(node, {phx_version: "1.4.2"})
+    
+    #VmsProvision.api_phoenix(node, {phx_version: "1.4.2"}) #+
+    VmsProvision.web_phoenix(node, {phx_version: "1.4.2", nodejs_version: "11"})
   
     #VmsProvision.postgresql_9_6(node)
     #VmsProvision.postgresql_client_9_6(node)
