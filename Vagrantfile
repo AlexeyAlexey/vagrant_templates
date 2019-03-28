@@ -30,10 +30,9 @@ Vagrant.configure("2") do |config|
     
     #VmsProvision.install_rvm(node)
 
-    #VmsProvision.web_rails(node)
-    
+    VmsProvision.web_rails(node, {ruby_version: "2.5", nodejs_version: "11"}) #+
     #VmsProvision.api_phoenix(node, {phx_version: "1.4.2"}) #+
-    VmsProvision.web_phoenix(node, {phx_version: "1.4.2", nodejs_version: "11"})
+    #VmsProvision.web_phoenix(node, {phx_version: "1.4.2", nodejs_version: "11"}) #+
   
     #VmsProvision.postgresql_9_6(node)
     #VmsProvision.postgresql_client_9_6(node)
